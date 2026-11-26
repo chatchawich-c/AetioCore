@@ -3,7 +3,7 @@ requires = ["maturin>=1.7,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "aetiocore-dl"
+name = "aetiocore-sem-dl"
 version = "0.1.1"
 description = "Edge-Level White-Box Causal Deep Learning backed by Rust & SEM"
 requires-python = ">=3.10"
@@ -12,5 +12,5 @@ dependencies = ["numpy>=1.24"]
 [tool.maturin]
 manifest-path = "crates/semflow-dl-py/Cargo.toml"
 python-source = "python"
-module-name = "aetiocore_dl._core"
+module-name = "aetiocore_sem_dl._core"
 features = ["pyo3/extension-module"]

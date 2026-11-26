@@ -3,13 +3,13 @@
 ## Python
 
 ```bash
-pip install aetiocore-sem aetiocore-dl
+pip install aetiocore-sem aetiocore-sem-dl
 ```
 
 ```python
 import numpy as np, pandas as pd
 import aetiocore_sem as ac
-from aetiocore_dl import EdgeWhiteBoxSEM, fit_whitebox_sem, intervene_do
+from aetiocore_sem_dl import EdgeWhiteBoxSEM, fit_whitebox_sem, intervene_do
 
 rng = np.random.default_rng(42)
 df = pd.DataFrame(rng.normal(size=(200, 6)), columns=["x1", "x2", "x3", "y1", "y2", "y3"])

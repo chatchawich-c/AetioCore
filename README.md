@@ -8,7 +8,7 @@ Unified Pure-Rust ecosystem for **Scalable Structural Equation Modeling (`AetioC
 ## Installation
 
 ```bash
-pip install aetiocore-sem aetiocore-dl
+pip install aetiocore-sem aetiocore-sem-dl
 ```
 
 ```r
