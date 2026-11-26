@@ -1,4 +1,4 @@
-# Usage & Installation (`v0.1.3`)
+# Usage & Installation (`v0.1.4`)
 
 ## Python
 

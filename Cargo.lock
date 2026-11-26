@@ -906,14 +906,14 @@ dependencies = [
 
 [[package]]
 name = "sem-autodiff"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "faer",
 ]
 
 [[package]]
 name = "sem-cb"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "faer",
  "rayon",
@@ -924,11 +924,11 @@ dependencies = [
 
 [[package]]
 name = "sem-dsl"
-version = "0.1.3"
+version = "0.1.4"
 
 [[package]]
 name = "sem-pls"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "faer",
  "rayon",
@@ -938,7 +938,7 @@ dependencies = [
 
 [[package]]
 name = "sem-py"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "numpy",
  "pyo3",
@@ -950,11 +950,11 @@ dependencies = [
 
 [[package]]
 name = "sem-traits"
-version = "0.1.3"
+version = "0.1.4"
 
 [[package]]
 name = "semflow-dl-core"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "rayon",
  "sem-autodiff",
@@ -964,7 +964,7 @@ dependencies = [
 
 [[package]]
 name = "semflow-dl-py"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "numpy",
  "pyo3",
