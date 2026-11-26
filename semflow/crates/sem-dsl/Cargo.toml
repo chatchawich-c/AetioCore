@@ -1,0 +1,4 @@
+[package]
+name = "sem-dsl"
+version.workspace = true
+edition.workspace = true

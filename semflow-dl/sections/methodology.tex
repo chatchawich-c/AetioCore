@@ -1,0 +1,100 @@
+\section{Methodology: Edge-Level White-Box Causal Deep Learning}
+\label{sec:methodology}
+
+To resolve the tension between opaque black-box predictors (\texttt{XGBoost}+SHAP) and flat glass-box additive models (EBM, NAM) that suffer from mediator blocking and measurement attenuation, we introduce \texttt{semflow-dl}, an edge-level white-box structural causal architecture.
+
+\subsection{Anchored Latent Measurement and Edge-Level Structural Graph}
+Let $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ be a directed acyclic graph (DAG) over $K$ latent constructs $\boldsymbol{\eta} = (\eta_1, \dots, \eta_K)^\top$, ordered topologically such that $(i, j) \in \mathcal{E} \implies i < j$. Each latent variable $\eta_k$ is observed through a block of noisy indicators $\mathbf{x}_k \in \mathbb{R}^{m_k}$:
+\begin{equation}
+  \mathbf{x}_k = \boldsymbol{\lambda}_k \eta_k + \boldsymbol{\delta}_k,
+  \qquad \mathbb{E}[\eta_k] = 0, \quad \operatorname{Var}(\eta_k) = 1, \quad \lambda_{k,1} > 0,
+  \label{eq:anchored-measurement}
+\end{equation}
+where the unit-variance and positive-first-loading constraints serve as an \emph{identification anchor}, eliminating sign and scale indeterminacy during nonlinear optimization.
+
+Rather than passing all parent variables into an opaque node-level multilayer perceptron, \texttt{semflow-dl} assigns a transparent, univariate operator $\phi_{ij}: \mathbb{R} \to \mathbb{R}$ to each structural edge $(i, j) \in \mathcal{E}$:
+\begin{equation}
+  \eta_j = b_j + \sum_{i \in \mathrm{Pa}(j)} \phi_{ij}(\eta_i) + \zeta_j,
+  \qquad \mathbb{E}\big[\phi_{ij}(\eta_i)\big] = 0,
+  \label{eq:edge-structural}
+\end{equation}
+where $\zeta_j$ is an exogenous structural disturbance with $\mathbb{E}[\zeta_j \mid \mathrm{Pa}(j)] = 0$.
+
+\subsection{Monotonic I-Spline Edge Operators and Exact Local Elasticity}
+For edges governed by domain monotonicity (e.g., physical degradation or clinical risk progression), we parameterize $\phi_{ij}$ using Ramsay's integrated B-splines (I-Splines) \citep{ramsay1988monotone}. Given a clamped knot sequence $t_0 \le \dots \le t_{B+k}$ of order $k \ge 3$ constructed from empirical quantiles of $\eta_i$, the $b$-th I-Spline basis function is defined as the integral of the corresponding nonnegative M-Spline $M_b(z) \ge 0$:
+\begin{equation}
+  I_b(z) = \int_{t_{\min}}^{z} M_b(u)\,du \in [0, 1], \qquad \frac{d}{dz} I_b(z) = M_b(z) \ge 0.
+\end{equation}
+We define the \emph{Monotonic I-Spline Edge Operator} with prescribed direction $s_{ij} \in \{+1, -1\}$ as:
+\begin{equation}
+  \phi_{ij}^{\mathrm{mono}}(z; \boldsymbol{\alpha}_{ij})
+  = s_{ij}\!\left(\operatorname{softplus}(\alpha_{ij,0})\,z + \sum_{b=1}^{B} \operatorname{softplus}(\alpha_{ij,b})\,I_b(z)\right) - \mu_{ij},
+  \label{eq:ispline-edge}
+\end{equation}
+where $\operatorname{softplus}(a) = \ln(1 + e^a)$, $\boldsymbol{\alpha}_{ij} \in \mathbb{R}^{B+1}$ are unconstrained learnable parameters, and $\mu_{ij} = \frac{1}{N}\sum_{n=1}^N \tilde{\phi}_{ij}(\eta_{i,n})$ enforces zero-mean centering. Each endogenous node $j$ is trained by minimizing the regularized empirical risk:
+\begin{equation}
+  \mathcal{L}_j(\boldsymbol{\theta}_j) = \frac{1}{N}\sum_{n=1}^{N}\big(\eta_{j,n} - \hat{\eta}_{j,n}\big)^2
+  + \lambda_{\mathrm{smooth}} \sum_{i \in \mathrm{Pa}(j)} \sum_{b=1}^{B} \big(\operatorname{softplus}(\alpha_{ij,b})\big)^2.
+  \label{eq:node-loss}
+\end{equation}
+
+\begin{proposition}[Global Smooth Monotonicity and Exact Local Causal Elasticity]
+\label{prop:monotonicity}
+For any finite parameter vector $\boldsymbol{\alpha}_{ij} \in \mathbb{R}^{B+1}$, knot order $k \ge 3$, and direction $s_{ij} \in \{+1, -1\}$, the edge operator $\phi_{ij}^{\mathrm{mono}}(z; \boldsymbol{\alpha}_{ij})$ in \eqref{eq:ispline-edge} is continuously differentiable ($C^1$-smooth) everywhere on $\mathbb{R}$, strictly monotonic in direction $s_{ij}$ across the entire real line (including out-of-range tails), and admits a closed-form local causal elasticity:
+\begin{equation}
+  \phi'_{ij}(z) = \frac{\partial \phi_{ij}^{\mathrm{mono}}(z)}{\partial z}
+  = s_{ij}\!\left(\operatorname{softplus}(\alpha_{ij,0}) + \sum_{b=1}^{B}\operatorname{softplus}(\alpha_{ij,b})\,M_b(z)\right),
+  \qquad s_{ij}\,\phi'_{ij}(z) > 0 \;\; \forall z \in \mathbb{R}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For order $k \ge 3$, each M-Spline $M_b(z)$ is a piecewise polynomial of degree $k - 1 \ge 2$ that is continuous on $\mathbb{R}$ and satisfies $M_b(z) \ge 0$ everywhere with compact support $[t_{\min}, t_{\max}]$. By the Fundamental Theorem of Calculus, $I_b(z) = \int_{t_{\min}}^z M_b(u)\,du$ is continuously differentiable with $I'_b(z) = M_b(z)$ on $\mathbb{R}$ (with $M_b(z) = 0$ outside $[t_{\min}, t_{\max}]$). Differentiating \eqref{eq:ispline-edge} term-by-term yields the stated expression for $\phi'_{ij}(z)$. Because $\operatorname{softplus}(a) = \ln(1 + e^a) > 0$ strictly for all finite $a \in \mathbb{R}$ and $M_b(z) \ge 0$, we obtain:
+\[
+  s_{ij}\,\phi'_{ij}(z) = \operatorname{softplus}(\alpha_{ij,0}) + \sum_{b=1}^{B}\operatorname{softplus}(\alpha_{ij,b})\,M_b(z) \ge \operatorname{softplus}(\alpha_{ij,0}) > 0 \qquad \forall z \in \mathbb{R}.
+\]
+Thus $\phi_{ij}^{\mathrm{mono}}$ is strictly monotonic everywhere with zero monotonicity violations, even under extreme tail extrapolation.
+\end{proof}
+
+\subsection{Exact Structural Intervention and Mediation Decomposition}
+Given a fitted DAG $\mathcal{G}$, \texttt{semflow-dl} evaluates Pearl's counterfactual shift intervention $\mathrm{do}(\eta_i \leftarrow \eta_i + \Delta)$ via three exact steps:
+\begin{enumerate}
+  \item \textbf{Abduction:} Recover individual-level structural residuals $\hat{\zeta}_{k,n} = \eta_{k,n} - \big(b_k + \sum_{u \in \mathrm{Pa}(k)} \phi_{uk}(\eta_{u,n})\big)$ for all endogenous $k$.
+  \item \textbf{Action:} Mutilate incoming edges to node $i$ and set $\eta_{i,n}^{\mathrm{cf}} = \eta_{i,n} + \Delta$.
+  \item \textbf{Prediction:} Propagate sequentially along the topological order of $\mathcal{G}$:
+  \begin{equation}
+    \eta_{k,n}^{\mathrm{cf}} = b_k + \hat{\zeta}_{k,n} + \sum_{u \in \mathrm{Pa}(k)} \phi_{uk}(\eta_{u,n}^{\mathrm{cf}}), \qquad \forall k \neq i.
+  \end{equation}
+\end{enumerate}
+
+\begin{proposition}[Exact Nonlinear Direct--Indirect Decomposition]
+\label{prop:mediation}
+Under the additive edge-level structural model \eqref{eq:edge-structural} on a correctly specified DAG $\mathcal{G}$, the average total treatment effect $\mathrm{ATE}_{\mathrm{Total}}(\Delta) = \frac{1}{N}\sum_{n=1}^N (\eta_{j,n}^{\mathrm{cf}} - \eta_{j,n})$ on target node $j$ under $\mathrm{do}(\eta_i \leftarrow \eta_i + \Delta)$ decomposes without approximation error into the exact sum of the direct effect and the mediated indirect effect:
+\begin{equation}
+  \mathrm{ATE}_{\mathrm{Total}}(\Delta)
+  = \underbrace{\frac{1}{N}\sum_{n=1}^{N}\Big[\phi_{ij}(\eta_{i,n} + \Delta) - \phi_{ij}(\eta_{i,n})\Big]}_{\mathrm{ADE}_{\mathrm{Direct}}(\Delta)}
+  + \underbrace{\frac{1}{N}\sum_{n=1}^{N}\sum_{m \in \mathrm{Pa}(j) \setminus \{i\}} \Big[\phi_{mj}(\eta_{m,n}^{\mathrm{cf}}) - \phi_{mj}(\eta_{m,n})\Big]}_{\mathrm{AIE}_{\mathrm{Indirect}}(\Delta)}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Subtracting $\eta_{j,n} = b_j + \hat{\zeta}_{j,n} + \sum_{u \in \mathrm{Pa}(j)} \phi_{uj}(\eta_{u,n})$ from $\eta_{j,n}^{\mathrm{cf}} = b_j + \hat{\zeta}_{j,n} + \sum_{u \in \mathrm{Pa}(j)} \phi_{uj}(\eta_{u,n}^{\mathrm{cf}})$ cancels both the intercept $b_j$ and the abducted disturbance $\hat{\zeta}_{j,n}$ identically for every sample $n$. Splitting $\mathrm{Pa}(j)$ into $\{i\}$ (if $(i, j) \in \mathcal{E}$) and $\mathrm{Pa}(j) \setminus \{i\}$, and substituting $\eta_{i,n}^{\mathrm{cf}} = \eta_{i,n} + \Delta$, yields the exact sample-wise identity. Averaging over $n = 1, \dots, N$ completes the proof. In contrast, any flat additive model $\hat{y} = \sum f_u(x_u)$ fixes $\eta_{m,n}^{\mathrm{cf}} \equiv \eta_{m,n}$ for all mediators $m$, forcing $\mathrm{AIE}_{\mathrm{Indirect}} \equiv 0$ (mediator blocking).
+\end{proof}
+
+\subsection{Distribution-Free Split-Conformal Calibration}
+To quantify predictive uncertainty without Gaussian residual assumptions, we partition a held-out calibration set $\mathcal{D}_{\mathrm{cal}}$ of size $N_{\mathrm{cal}}$ and compute absolute nonconformity scores $R_m = |\eta_{j,m} - \hat{\eta}_{j,m}|$ for $m = 1, \dots, N_{\mathrm{cal}}$. Let $q_{1-\alpha}$ be the $\lceil (N_{\mathrm{cal}} + 1)(1 - \alpha) \rceil / N_{\mathrm{cal}}$ empirical quantile of $\{R_m\}_{m=1}^{N_{\mathrm{cal}}}$.
+
+\begin{proposition}[Finite-Sample Conformal Coverage]
+\label{prop:conformal}
+Assume the calibration samples $\mathcal{D}_{\mathrm{cal}}$ and a new test point $(\mathbf{x}_{\mathrm{test}}, \eta_{j,\mathrm{test}})$ are exchangeable. Then, for any miscoverage level $\alpha \in (0, 1)$ and any underlying residual distribution, the prediction interval $\mathcal{C}_{1-\alpha}(\mathbf{x}_{\mathrm{test}}) = [\hat{\eta}_{j,\mathrm{test}} - q_{1-\alpha},\; \hat{\eta}_{j,\mathrm{test}} + q_{1-\alpha}]$ satisfies:
+\begin{equation}
+  \mathbb{P}\!\left(\eta_{j,\mathrm{test}} \in \mathcal{C}_{1-\alpha}(\mathbf{x}_{\mathrm{test}})\right) \ge 1 - \alpha.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Because the measurement anchors and edge parameters $\hat{\boldsymbol{\theta}}$ are fixed prior to evaluating $\mathcal{D}_{\mathrm{cal}}$, the nonconformity scores $R_1, \dots, R_{N_{\mathrm{cal}}}, R_{\mathrm{test}}$ are exchangeable random variables. By the standard split-conformal rank lemma \citep{lei2018distribution}, the rank of $R_{\mathrm{test}}$ among $\{R_1, \dots, R_{N_{\mathrm{cal}}}, R_{\mathrm{test}}\}$ is uniformly distributed over $\{1, \dots, N_{\mathrm{cal}} + 1\}$ (breaking ties conservatively). Consequently, $\mathbb{P}(R_{\mathrm{test}} \le q_{1-\alpha}) \ge \lceil (N_{\mathrm{cal}} + 1)(1 - \alpha) \rceil / (N_{\mathrm{cal}} + 1) \ge 1 - \alpha$.
+\end{proof}
+
+\subsection{Computational Complexity in Rust}
+For a node with $d_{\mathrm{in}} = |\mathrm{Pa}(j)|$ incoming edges and $B$ spline basis functions per edge ($B \approx 6\text{--}10$), precomputing the basis matrices once in parallel via \texttt{rayon} requires $O(N d_{\mathrm{in}} B k)$ operations. Each subsequent L-BFGS evaluation costs $O(N d_{\mathrm{in}} B)$ floating-point operations over contiguous memory with zero GPU dependency, enabling sub-second CPU training on $10^4$ observations (246\,ms) and 5.9\,s on $10^5$ observations within 100\,MB of RAM.

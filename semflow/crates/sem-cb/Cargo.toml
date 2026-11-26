@@ -1,0 +1,11 @@
+[package]
+name = "sem-cb"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+faer.workspace = true
+rayon.workspace = true
+sem-traits = { path = "../sem-traits" }
+sem-dsl = { path = "../sem-dsl" }
+sem-autodiff = { path = "../sem-autodiff" }

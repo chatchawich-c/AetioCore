@@ -1,0 +1,17 @@
+# Raw data & local archives (Zero-Duplication Policy)
+Data for Benchmark Gallery/
+*.docx
+*.zip
+
+# Build & environment caches
+target/
+.venv/
+site/
+dist/
+__pycache__/
+*.py[cod]
+*.so
+*.dylib
+*.dll
+.pytest_cache/
+.DS_Store

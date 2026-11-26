@@ -1,0 +1,21 @@
+suite,n_rows,n_vars,n_boot,engine,load_ms,fit_ms,total_ms,peak_rss_mb,converged
+boot,2000,12,1000,semflow_py_pls,1.18,201.9,203.91,55.82,True
+boot,2000,12,1000,semflow_r_pls,,,,58.89,ERR: Execution halted
+boot,2000,12,1000,semflow_py_plsc,1.38,190.93,192.32,55.59,True
+boot,2000,12,1000,csem_pls,5,24589,24594,209.73,True
+boot,2000,12,1000,csem_pls_par,,,,139.96,TIMEOUT (180s)
+boot,2000,12,5000,semflow_py_pls,1.48,970.3,971.78,56.19,True
+boot,2000,12,5000,semflow_r_pls,,,,58.92,ERR: Execution halted
+boot,2000,12,5000,semflow_py_plsc,1.47,1080.5,1082.99,56.46,True
+boot,2000,12,5000,csem_pls,4,110700,110704,216.12,True
+boot,2000,12,5000,csem_pls_par,,,,139.6,TIMEOUT (180s)
+boot,10000,12,1000,semflow_py_pls,2.23,858.43,860.33,57.89,True
+boot,10000,12,1000,semflow_r_pls,,,,58.84,ERR: Execution halted
+boot,10000,12,1000,semflow_py_plsc,2.13,855.15,856.81,57.94,True
+boot,10000,12,1000,csem_pls,6,71420,71426,189.04,True
+boot,10000,12,1000,csem_pls_par,,,,160.54,TIMEOUT (180s)
+boot,10000,12,5000,semflow_py_pls,2.06,4445.6,4447.54,59.4,True
+boot,10000,12,5000,semflow_r_pls,,,,58.78,ERR: Execution halted
+boot,10000,12,5000,semflow_py_plsc,2.04,4689.6,4691.63,58.69,True
+boot,10000,12,5000,csem_pls,,,,189.67,TIMEOUT (180s)
+boot,10000,12,5000,csem_pls_par,,,,160.55,TIMEOUT (180s)

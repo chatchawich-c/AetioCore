@@ -1,0 +1,27 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/sem-traits",
+    "crates/sem-dsl",
+    "crates/sem-autodiff",
+    "crates/sem-pls",
+    "crates/sem-cb",
+    "crates/sem-py",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+
+[workspace.dependencies]
+faer = "0.20"
+rayon = "1.10"
+pyo3 = { version = "0.22", features = ["extension-module"] }
+numpy = "0.22"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 4
+strip = "symbols"

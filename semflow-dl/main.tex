@@ -1,0 +1,32 @@
+\documentclass[twoside,11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[round]{natbib}
+
+\newtheorem{proposition}{Proposition}
+
+\title{semflow-dl: Edge-Level White-Box Causal Deep Learning with Monotonic I-Splines and Conformal Guarantees}
+\author{Chatchawich Chaihong \\
+Department of Interdisciplinary Engineering, Faculty of Engineering \\
+Prince of Songkla University, Hat Yai, Songkhla, Thailand}
+\date{November 22, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Flat interpretable machine learning models such as Explainable Boosting Machines (\texttt{EBM}) and post-hoc \texttt{XGBoost+SHAP} fail to propagate interventions through mediated causal pathways (\emph{mediator blocking}) and often violate domain monotonicity in sparse distribution tails. Conversely, classical Structural Equation Modeling (SEM) captures latent causal graphs but is limited to linear structural equations. We present \texttt{semflow-dl}, a pure-Rust edge-level white-box causal deep learning library with zero-copy Python bindings. By parameterizing structural DAG edges with Ramsay's monotonic I-Splines, ANOVA-purified 2D interactions, and split-conformal calibration, \texttt{semflow-dl} guarantees global $C^1$ monotonicity ($0.0\%$ violations), exact closed-form local causal elasticity via M-Spline derivatives, exact direct--indirect counterfactual decomposition under Pearl's $\mathrm{do}(\cdot)$ operator, and finite-sample coverage guarantees. Empirically, \texttt{semflow-dl} reduces causal intervention error by over $5\times$ compared to \texttt{EBM} and \texttt{XGBoost+SHAP} while consuming $2.4\times\text{--}2.9\times$ less peak memory.
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/methodology}
+\input{sections/experiments}
+\input{sections/discussion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

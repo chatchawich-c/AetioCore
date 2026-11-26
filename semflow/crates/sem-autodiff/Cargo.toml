@@ -1,0 +1,7 @@
+[package]
+name = "sem-autodiff"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+faer.workspace = true

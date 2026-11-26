@@ -1,0 +1,26 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/semflow-dl-core",
+    "crates/semflow-dl-py",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+
+[workspace.dependencies]
+rayon = "1.10"
+pyo3 = { version = "0.22", features = ["extension-module"] }
+numpy = "0.22"
+# อ้างอิงแกนกลางจาก semflow โดยตรง (เมื่อขึ้น crates.io เปลี่ยนเป็นเลขเวอร์ชันได้ทันที)
+sem-traits = { path = "../semflow/crates/sem-traits" }
+sem-dsl = { path = "../semflow/crates/sem-dsl" }
+sem-autodiff = { path = "../semflow/crates/sem-autodiff" }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 4
+strip = "symbols"

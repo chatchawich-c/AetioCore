@@ -1,0 +1,13 @@
+n_rows,engine,load_ms,fit_ms,total_ms,peak_rss_mb,converged
+10000,semflow_pls_f32,2.08,1.45,3.68,56.97,True
+10000,semflow_plsc_f32,2.18,1.24,3.6,56.53,True
+10000,semflow_cb_f32,2.0,7.11,8.85,57.61,True
+10000,semopy_cb,3.19,47.75,50.97,216.5,True
+100000,semflow_pls_f32,9.12,12.0,21.12,84.62,True
+100000,semflow_plsc_f32,9.05,11.33,20.38,84.28,True
+100000,semflow_cb_f32,6.26,17.45,26.07,79.18,True
+100000,semopy_cb,8.16,70.85,79.01,281.94,True
+1000000,semflow_pls_f32,28.22,123.42,153.27,262.36,True
+1000000,semflow_plsc_f32,27.44,127.29,154.74,278.75,True
+1000000,semflow_cb_f32,30.93,149.48,177.92,268.05,True
+1000000,semopy_cb,81.77,542.59,624.36,817.72,True

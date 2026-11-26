@@ -1,0 +1,10 @@
+[package]
+name = "sem-pls"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+faer.workspace = true
+rayon.workspace = true
+sem-traits = { path = "../sem-traits" }
+sem-dsl = { path = "../sem-dsl" }

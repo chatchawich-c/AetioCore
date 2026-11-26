@@ -1,0 +1,10 @@
+target/
+.venv/
+dist/
+__pycache__/
+*.pyc
+*.so
+*.dylib
+*.dll
+.DS_Store
+*.zip

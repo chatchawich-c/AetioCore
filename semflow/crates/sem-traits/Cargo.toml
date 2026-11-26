@@ -1,0 +1,4 @@
+[package]
+name = "sem-traits"
+version.workspace = true
+edition.workspace = true

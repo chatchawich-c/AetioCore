@@ -1,0 +1,19 @@
+suite,n_rows,n_vars,n_boot,engine,load_ms,fit_ms,total_ms,peak_rss_mb,converged
+dims,100000,12,0,semflow_py_cb,7.93,19.93,27.96,85.09,False
+dims,100000,12,0,semflow_r_cb,,,,58.86,ERR: Execution halted
+dims,100000,12,0,semopy_cb,7.14,54.01,61.15,279.75,True
+dims,100000,12,0,lavaan_cb,17,375,393,204.01,True
+dims,100000,12,0,semflow_py_pls,8.75,9.82,18.58,84.66,True
+dims,100000,12,0,csem_pls,17,275,291,209.53,True
+dims,100000,30,0,semflow_py_cb,16.33,78.51,94.84,112.12,False
+dims,100000,30,0,semflow_r_cb,,,,58.83,ERR: Execution halted
+dims,100000,30,0,semopy_cb,15.89,172.2,188.09,382.7,True
+dims,100000,30,0,lavaan_cb,83,2251,2455,304.52,True
+dims,100000,30,0,semflow_py_pls,27.42,45.35,66.19,119.48,True
+dims,100000,30,0,csem_pls,67,1063,1123,354.99,True
+dims,100000,60,0,semflow_py_cb,41.37,1001.64,1069.89,171.16,False
+dims,100000,60,0,semflow_r_cb,,,,58.94,ERR: Execution halted
+dims,100000,60,0,semopy_cb,46.59,762.72,809.18,575.58,True
+dims,100000,60,0,lavaan_cb,185,6738,6923,521.83,True
+dims,100000,60,0,semflow_py_pls,51.59,128.54,189.22,194.4,True
+dims,100000,60,0,csem_pls,169,3689,3996,569.53,True

@@ -1,0 +1,10 @@
+[package]
+name = "semflow-dl-core"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+rayon.workspace = true
+sem-traits.workspace = true
+sem-dsl.workspace = true
+sem-autodiff.workspace = true

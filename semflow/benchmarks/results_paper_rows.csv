@@ -1,0 +1,29 @@
+suite,n_rows,n_vars,n_boot,engine,load_ms,fit_ms,total_ms,peak_rss_mb,converged
+rows,10000,12,0,semflow_py_cb,2.03,8.52,10.09,57.85,True
+rows,10000,12,0,semflow_r_cb,,,,58.89,ERR: Execution halted
+rows,10000,12,0,semopy_cb,3.11,47.83,50.94,218.04,True
+rows,10000,12,0,lavaan_cb,3,137,140,142.77,True
+rows,10000,12,0,semflow_py_pls,1.91,1.54,4.28,57.45,True
+rows,10000,12,0,semflow_r_pls,,,,58.9,ERR: Execution halted
+rows,10000,12,0,csem_pls,3,47,50,177.7,True
+rows,100000,12,0,semflow_py_cb,7.0,23.15,29.68,79.96,False
+rows,100000,12,0,semflow_r_cb,,,,58.79,ERR: Execution halted
+rows,100000,12,0,semopy_cb,9.46,69.67,82.42,279.7,True
+rows,100000,12,0,lavaan_cb,19,393,413,204.66,True
+rows,100000,12,0,semflow_py_pls,6.79,9.98,16.77,79.22,True
+rows,100000,12,0,semflow_r_pls,,,,59.01,ERR: Execution halted
+rows,100000,12,0,csem_pls,18,366,385,209.16,True
+rows,1000000,12,0,semflow_py_cb,27.3,146.93,174.23,274.12,True
+rows,1000000,12,0,semflow_r_cb,,,,58.92,ERR: Execution halted
+rows,1000000,12,0,semopy_cb,61.29,501.46,562.55,761.14,True
+rows,1000000,12,0,lavaan_cb,171,2586,2756,703.16,True
+rows,1000000,12,0,semflow_py_pls,27.77,122.13,149.91,273.83,True
+rows,1000000,12,0,semflow_r_pls,,,,58.91,ERR: Execution halted
+rows,1000000,12,0,csem_pls,240,2988,3228,1006.5,True
+rows,5000000,12,0,semflow_py_cb,239.15,1599.57,1821.05,892.82,True
+rows,5000000,12,0,semflow_r_cb,,,,58.83,ERR: Execution halted
+rows,5000000,12,0,semopy_cb,409.29,3607.66,4072.02,2996.27,True
+rows,5000000,12,0,lavaan_cb,,,,2118.5,TIMEOUT (90s)
+rows,5000000,12,0,semflow_py_pls,126.39,665.07,790.2,962.23,True
+rows,5000000,12,0,semflow_r_pls,,,,59.14,ERR: Execution halted
+rows,5000000,12,0,csem_pls,,,,3251.88,TIMEOUT (90s)

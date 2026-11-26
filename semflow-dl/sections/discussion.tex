@@ -1,0 +1,18 @@
+\section{Discussion and Limitations}
+\label{sec:discussion}
+
+The empirical results demonstrate that embedding univariate monotonic I-Splines directly onto the edges of an identified latent DAG resolves a fundamental blind spot in contemporary tabular machine learning. Rather than treating interpretability as a post-hoc approximation over black-box ensembles (SHAP) or restricting glass-box models to flat covariate-to-target mappings (EBM, NAM), \texttt{semflow-dl} preserves mechanistic causal structure while retaining nonlinear expressiveness and low-memory CPU efficiency.
+
+Nevertheless, several methodological assumptions and limitations warrant careful consideration:
+
+\begin{enumerate}
+  \item \textbf{Specification of the Causal DAG:} Consistent with confirmatory Structural Equation Modeling, \texttt{semflow-dl} assumes that the directed acyclic graph $\mathcal{G}$ and measurement indicator groupings are specified from domain theory or prior causal discovery. Misspecifying edge directions or omitting key mediators will bias the resulting $\mathrm{do}(\cdot)$ decomposition.
+  \item \textbf{Unmeasured Confounding:} Proposition~\ref{prop:mediation} relies on the standard structural causal assumption of no unmeasured confounders between parent and child latents ($\mathbb{E}[\zeta_j \mid \mathrm{Pa}(j)] = 0$). In observational settings where latent confounding is suspected, sensitivity analyses or instrumental-variable extensions remain necessary.
+  \item \textbf{Measurement Attenuation in Two-Stage Anchoring:} To achieve fast, convex-like convergence without GPU overhead, \texttt{semflow-dl} estimates anchored latent scores via first-principal-component power iteration prior to fitting edge splines. As visible in the slight gap between the estimated curve and the noise-free oracle in Figure~\ref{fig:whitebox-4panel}(a)--(c), finite-indicator measurement error introduces mild residual attenuation. Joint end-to-end latent-and-spline estimation or PLSc-style reliability disattenuation represents a promising direction to further tighten oracle recovery.
+  \item \textbf{Exchangeability under Distribution Shift:} While Proposition~\ref{prop:conformal} guarantees distribution-free finite-sample coverage on exchangeable test sets, non-stationary time-series telemetry (such as seasonal wind-turbine regimes) can violate exchangeability. Extending the current split-conformal calibrator to Adaptive Conformal Inference (ACI) and integrating the sparse CSR spatial coupling module ($\rho\mathbf{W}$) into streaming edge deployments are immediate priorities for future releases.
+\end{enumerate}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+We introduced \texttt{semflow-dl}, a pure-Rust edge-level white-box causal deep learning library with zero-copy Python bindings designed as a modular extension to the \texttt{semflow} ecosystem. By combining anchored latent measurement models, Ramsay's monotonic I-Spline edge operators, ANOVA-purified 2D interactions, exact Pearl counterfactual propagation, and split-conformal calibration, \texttt{semflow-dl} bridges the gap between classical linear SEM and modern tabular machine learning. Across controlled mediation benchmarks and a wind-turbine SCADA case study, \texttt{semflow-dl} reduces causal intervention error by more than $5\times$ compared to EBM and XGBoost+SHAP, guarantees $0.0\%$ monotonicity violations, provides closed-form local causal elasticity via M-Spline derivatives, and operates within 87\,MB of RAM on standard CPU hardware. All source code, parity tests, and reproducible benchmark scripts are openly available to support transparent, causally grounded modeling across scientific and engineering disciplines.

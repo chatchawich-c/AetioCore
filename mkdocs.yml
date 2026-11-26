@@ -1,0 +1,42 @@
+site_name: SEMFlow Documentation
+site_description: Unified Rust-Backed Structural Equation Modeling and White-Box Causal Deep Learning
+site_url: https://chatchawich-c.github.io/SEMFlow/
+repo_url: https://github.com/chatchawich-c/SEMFlow
+repo_name: chatchawich-c/SEMFlow
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.instant
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - tables
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Usage & Installation: usage.md
+  - Mathematical Equations: equations.md
+  - Benchmarks & Gallery: benchmarks/index.md

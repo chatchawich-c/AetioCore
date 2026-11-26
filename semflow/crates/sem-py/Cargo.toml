@@ -1,0 +1,16 @@
+[package]
+name = "sem-py"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+name = "_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true
+numpy.workspace = true
+sem-traits = { path = "../sem-traits" }
+sem-dsl = { path = "../sem-dsl" }
+sem-pls = { path = "../sem-pls" }
+sem-cb = { path = "../sem-cb" }

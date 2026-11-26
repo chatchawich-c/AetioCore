@@ -1,0 +1,95 @@
+{
+  "paths": [
+    {
+      "from": "ind60",
+      "to": "dem60",
+      "est": 0.4049359835
+    },
+    {
+      "from": "ind60",
+      "to": "dem65",
+      "est": 0.19747931702
+    },
+    {
+      "from": "dem60",
+      "to": "dem65",
+      "est": 0.78496334253
+    }
+  ],
+  "loadings": [
+    {
+      "latent": "ind60",
+      "indicator": "x1",
+      "est": 0.95317261141
+    },
+    {
+      "latent": "ind60",
+      "indicator": "x2",
+      "est": 0.96755789207
+    },
+    {
+      "latent": "ind60",
+      "indicator": "x3",
+      "est": 0.92241405697
+    },
+    {
+      "latent": "dem60",
+      "indicator": "y1",
+      "est": 0.88115436598
+    },
+    {
+      "latent": "dem60",
+      "indicator": "y2",
+      "est": 0.81014970441
+    },
+    {
+      "latent": "dem60",
+      "indicator": "y3",
+      "est": 0.79599687517
+    },
+    {
+      "latent": "dem60",
+      "indicator": "y4",
+      "est": 0.90282774621
+    },
+    {
+      "latent": "dem65",
+      "indicator": "y5",
+      "est": 0.84299482897
+    },
+    {
+      "latent": "dem65",
+      "indicator": "y6",
+      "est": 0.8388302798
+    },
+    {
+      "latent": "dem65",
+      "indicator": "y7",
+      "est": 0.86980177183
+    },
+    {
+      "latent": "dem65",
+      "indicator": "y8",
+      "est": 0.89620198227
+    }
+  ],
+  "rho_a": {
+    "ind60": 1,
+    "dem60": 1,
+    "dem65": 1
+  },
+  "ave": {
+    "ind60": 0.89851799805,
+    "dem60": 0.72037113121,
+    "dem65": 0.74350240882
+  },
+  "cr": {
+    "ind60": 0.96370421811,
+    "dem60": 0.91130979364,
+    "dem65": 0.92054909715
+  },
+  "r2": {
+    "dem60": 0.16397315074,
+    "dem65": 0.78070704292
+  }
+}

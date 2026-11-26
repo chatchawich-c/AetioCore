@@ -1,0 +1,10 @@
+target/
+r-pkg/src/rust/target/
+.venv/
+dist/
+__pycache__/
+*.pyc
+*.so
+*.dylib
+*.dll
+.DS_Store
