@@ -1,9 +1,9 @@
-Package: semflow
+Package: aetiocore
 Title: Rust-Backed Structural Equation Modeling and Causal Risk Flow
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("Chatchawich", "Chaihong", email = "6610130021@email.psu.ac.th", role = c("aut", "cre"), comment = c(ORCID = "0009-0000-7379-5738"))
 Description: Pure-Rust engine for Covariance-Based SEM (ML/GLS/ULS, FIML), Consistent PLS-SEM, and systemic causal risk propagation. Supported by the European Union Erasmus+ CBHE ECO-WIND project (Grant No. ERASMUS-EDU-2025-CBHE-101177220).
 License: MIT | file LICENSE
 Encoding: UTF-8
-URL: https://github.com/chatchawich-c/SEMFlow, https://chatchawich-c.github.io/SEMFlow/
-BugReports: https://github.com/chatchawich-c/SEMFlow/issues
+URL: https://github.com/chatchawich-c/AetioCore, https://chatchawich-c.github.io/AetioCore/
+BugReports: https://github.com/chatchawich-c/AetioCore/issues

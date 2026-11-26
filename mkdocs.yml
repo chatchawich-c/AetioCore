@@ -1,8 +1,8 @@
-site_name: SEMFlow Documentation
+site_name: AetioCore Documentation
 site_description: Unified Rust-Backed Structural Equation Modeling and White-Box Causal Deep Learning
-site_url: https://chatchawich-c.github.io/SEMFlow/
-repo_url: https://github.com/chatchawich-c/SEMFlow
-repo_name: chatchawich-c/SEMFlow
+site_url: https://chatchawich-c.github.io/AetioCore/
+repo_url: https://github.com/chatchawich-c/AetioCore
+repo_name: chatchawich-c/AetioCore
 
 theme:
   name: material

@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-title: "SEMFlow: Unified Rust-Backed Structural Equation Modeling and White-Box Causal Deep Learning"
-message: "If you use SEMFlow or SEMFlow-DL in your research, please cite this repository."
+title: "AetioCore-SEM: Unified Rust-Backed Structural Equation Modeling and White-Box Causal Deep Learning"
+message: "If you use AetioCore-SEM or AetioCore-DL in your research, please cite this repository."
 type: software
-version: 0.1.1
+version: 0.1.2
 date-released: 2026-11-26
 authors:
   - family-names: Chaihong
@@ -10,8 +10,8 @@ authors:
     email: 6610130021@email.psu.ac.th
     orcid: "https://orcid.org/0009-0000-7379-5738"
     affiliation: "Prince of Songkla University"
-repository-code: "https://github.com/chatchawich-c/SEMFlow"
-url: "https://chatchawich-c.github.io/SEMFlow/"
+repository-code: "https://github.com/chatchawich-c/AetioCore"
+url: "https://chatchawich-c.github.io/AetioCore/"
 license: "MIT OR Apache-2.0"
 funding:
   - name: "European Union Erasmus+ Capacity Building in Higher Education (CBHE) ECO-WIND"

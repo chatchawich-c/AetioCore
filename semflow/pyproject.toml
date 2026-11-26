@@ -3,7 +3,7 @@ requires = ["maturin>=1.7,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "semflow"
+name = "aetiocore-sem"
 version = "0.1.1"
 description = "Rust-backed Universal Structural Equation Modeling (Python & R Ready)"
 requires-python = ">=3.10"
@@ -12,5 +12,5 @@ dependencies = ["numpy>=1.24"]
 [tool.maturin]
 manifest-path = "crates/sem-py/Cargo.toml"
 python-source = "python"
-module-name = "semflow._core"
+module-name = "aetiocore_sem._core"
 features = ["pyo3/extension-module"]

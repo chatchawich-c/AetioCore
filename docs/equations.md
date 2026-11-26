@@ -1,6 +1,6 @@
 # Mathematical Formulation
 
-## 1. RAM Covariance-Based SEM (`SEMFlow`)
+## 1. RAM Covariance-Based SEM (`AetioCore-SEM`)
 
 $$\boldsymbol{\Sigma}(\boldsymbol{\theta}) = \mathbf{F}(\mathbf{I}-\mathbf{A})^{-1}\mathbf{S}_{\mathrm{ram}}(\mathbf{I}-\mathbf{A})^{-\top}\mathbf{F}^\top$$
 
@@ -8,7 +8,7 @@ $$F_{\mathrm{ML}}(\boldsymbol{\theta}) = \ln|\boldsymbol{\Sigma}(\boldsymbol{\th
 
 $$\Delta\boldsymbol{\eta} = (\mathbf{I}-\mathbf{B})^{-1}\boldsymbol{\Gamma}\Delta\boldsymbol{\xi}$$
 
-## 2. White-Box Causal Deep Learning (`SEMFlow-DL`)
+## 2. White-Box Causal Deep Learning (`AetioCore-DL`)
 
 $$\boldsymbol{\eta} = \rho\mathbf{W}\boldsymbol{\eta} + \sum_{j \in \mathrm{pa}(k)} \phi_{kj}(\eta_j) + \boldsymbol{\zeta}, \quad \phi'_{kj}(z) \ge 0$$
 
