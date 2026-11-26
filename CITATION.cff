@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use AetioCore-SEM or AetioCore-DL in your research, please cite this repository."
 title: "AetioCore"
-version: "0.1.4"
+version: "0.1.5"
 date-released: "2026-11-26"
 license: Apache-2.0
 authors:

@@ -1,0 +1,21 @@
+{
+  "title": "AetioCore",
+  "upload_type": "software",
+  "description": "Unified pure-Rust Structural Equation Modeling (aetiocore-sem) and White-Box Causal Deep Learning (aetiocore-sem-dl) monorepo library supporting condition-based maintenance and scientific modeling, funded by the European Union Erasmus+ CBHE project ECO-WIND (Grant No. ERASMUS-EDU-2025-CBHE-101177220).",
+  "creators": [
+    {
+      "name": "Chaihong, Chatchawich",
+      "affiliation": "Prince of Songkla University",
+      "orcid": "0009-0000-7379-5738"
+    }
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "structural equation modeling",
+    "causal deep learning",
+    "white-box ai",
+    "rust",
+    "pyo3",
+    "eco-wind"
+  ]
+}
