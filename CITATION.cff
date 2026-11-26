@@ -1,15 +1,27 @@
 cff-version: 1.2.0
-title: "AetioCore-SEM: Unified Rust-Backed Structural Equation Modeling and White-Box Causal Deep Learning"
 message: "If you use AetioCore-SEM or AetioCore-DL in your research, please cite this repository."
+title: "AetioCore-SEM: Unified Rust-Backed Structural Equation Modeling and White-Box Causal Deep Learning"
 type: software
 version: "0.1.4"
 date-released: "2026-11-26"
-authors:
-  - family-names: Chaihong
-    given-names: Chatchawich
-    email: 6610130021@email.psu.ac.th
-    orcid: "https://orcid.org/0009-0000-7379-5738"
-    affiliation: "Prince of Songkla University"
+license: Apache-2.0
 repository-code: "https://github.com/chatchawich-c/AetioCore"
 url: "https://chatchawich-c.github.io/AetioCore/"
-license: apache-2.0
+authors:
+  - family-names: "Chaihong"
+    given-names: "Chatchawich"
+    email: "6610130021@email.psu.ac.th"
+    orcid: "https://orcid.org/0009-0000-7379-5738"
+    affiliation: "Prince of Songkla University"
+keywords:
+  - structural equation modeling
+  - causal deep learning
+  - white-box ai
+  - rust
+  - pyo3
+  - eco-wind
+abstract: >
+  Unified pure-Rust Structural Equation Modeling (aetiocore-sem) and White-Box Causal Deep Learning (aetiocore-sem-dl)
+  monorepo library supporting condition-based maintenance and scientific modeling, funded by the European Union Erasmus+ CBHE
+  project ECO-WIND (Grant No. ERASMUS-EDU-2025-CBHE-101177220) and engineered for low-footprint execution
+  (wheel size < 5 MiB, benchmark Peak RSS <= 150.0 MiB).
