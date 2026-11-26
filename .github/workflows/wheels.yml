@@ -104,8 +104,22 @@ jobs:
           tag_name: ${{ needs.check-release.outputs.tag }}
           generate_release_notes: true
           files: dist/*
+      - name: Keep only aetiocore_sem wheels (exclude aetiocore_sem_dl)
+        shell: bash
+        run: |
+          mkdir -p dist_sem_only
+          for f in dist/aetiocore_sem*.whl; do
+            [ -e "$f" ] || continue
+            base=$(basename "$f")
+            case "$base" in
+              aetiocore_sem_dl*) ;;
+              *) mv "$f" dist_sem_only/ ;;
+            esac
+          done
+          ls -la dist_sem_only
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          packages-dir: dist_sem_only
           skip-existing: true
 
   publish-dl:
