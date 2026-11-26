@@ -61,7 +61,7 @@ class EdgeWhiteBoxSEM:
         }
 
     def summary(self) -> str:
-        lines = ["EdgeWhiteBoxSEM (semflow-dl v0.1)"]
+        lines = ["EdgeWhiteBoxSEM (semflow-dl v0.1.1)"]
         lines.append("--- Edge Operators & Mean Local Elasticity E[phi'(z)] ---")
         for src, dst, etype, elast in self._model.edges_summary:
             lines.append(f"  {src} -> {dst} [{etype:7s}] : mean phi'(z) = {elast:+.4f}")
@@ -69,3 +69,11 @@ class EdgeWhiteBoxSEM:
         for lat, r2 in self._model.r_squared.items():
             lines.append(f"  {lat} : {r2:.4f}")
         return "\n".join(lines)
+
+
+def fit_whitebox_sem(formula: str, df_train, df_cal=None, knots: int = 6, smooth_lambda: float = 1e-4, max_iter: int = 300, conformal_alpha: float = 0.05) -> EdgeWhiteBoxSEM:
+    return EdgeWhiteBoxSEM(formula=formula, knots=knots, smooth_lambda=smooth_lambda, max_iter=max_iter).fit(df_train, df_cal=df_cal, conformal_alpha=conformal_alpha)
+
+
+def intervene_do(model: EdgeWhiteBoxSEM, df, do_var: str, delta: float, target: str) -> dict:
+    return model.intervene(df, do_var=do_var, delta=delta, target=target)

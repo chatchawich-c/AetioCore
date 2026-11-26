@@ -2,7 +2,7 @@ cff-version: 1.2.0
 title: "SEMFlow: Unified Rust-Backed Structural Equation Modeling and White-Box Causal Deep Learning"
 message: "If you use SEMFlow or SEMFlow-DL in your research, please cite this repository."
 type: software
-version: 0.1.0
+version: 0.1.1
 date-released: 2026-11-26
 authors:
   - family-names: Chaihong

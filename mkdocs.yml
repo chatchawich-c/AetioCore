@@ -21,14 +21,16 @@ theme:
         name: Switch to light mode
   features:
     - navigation.tabs
-    - navigation.instant
+    - navigation.top
     - content.code.copy
 
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
+  - admonition
   - pymdownx.highlight
   - pymdownx.superfences
+  - pymdownx.inlinehilite
   - tables
 
 extra_javascript:
@@ -38,5 +40,6 @@ extra_javascript:
 nav:
   - Home: index.md
   - Usage & Installation: usage.md
+  - API Reference: api.md
   - Mathematical Equations: equations.md
   - Benchmarks & Gallery: benchmarks/index.md

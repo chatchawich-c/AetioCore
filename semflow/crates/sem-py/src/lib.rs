@@ -166,8 +166,15 @@ fn fit_cb_f64(
     Ok(wrap_cb(res))
 }
 
+#[pyfunction]
+fn validate_dsl(formula: &str) -> PyResult<bool> {
+    sem_dsl::parse_formula(formula).map_err(PyValueError::new_err)?;
+    Ok(true)
+}
+
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(validate_dsl, m)?)?;
     m.add_class::<PyPlsResult>()?;
     m.add_class::<PyCbResult>()?;
     m.add_function(wrap_pyfunction!(fit_pls_f32, m)?)?;

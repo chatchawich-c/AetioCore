@@ -1,4 +1,4 @@
-# SEMFlow & SEMFlow-DL (`v0.1.0`)
+# SEMFlow & SEMFlow-DL (`v0.1.1`)
 
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://chatchawich-c.github.io/SEMFlow/)
 [![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-green)](LICENSE-APACHE)
