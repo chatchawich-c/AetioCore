@@ -1,4 +1,4 @@
-# API Reference (`v0.1.2`)
+# API Reference (`v0.1.3`)
 
 ## 1. Tier 1: `semflow` (Classical CB-SEM, PLS/PLSc & Risk Flow)
 
