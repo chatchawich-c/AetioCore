@@ -4,6 +4,7 @@ title: "AetioCore"
 version: "0.1.5"
 date-released: "2026-11-26"
 license: Apache-2.0
+doi: 10.5281/zenodo.24568459
 authors:
   - family-names: "Chaihong"
     given-names: "Chatchawich"

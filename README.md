@@ -1,5 +1,7 @@
 # AetioCore-SEM & AetioCore-DL (`v0.1.4`)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24568459.svg)](https://doi.org/10.5281/zenodo.24568459)
+
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://chatchawich-c.github.io/AetioCore/)
 [![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-green)](LICENSE-APACHE)
 
