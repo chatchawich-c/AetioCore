@@ -2,8 +2,8 @@ cff-version: 1.2.0
 title: "AetioCore-SEM: Unified Rust-Backed Structural Equation Modeling and White-Box Causal Deep Learning"
 message: "If you use AetioCore-SEM or AetioCore-DL in your research, please cite this repository."
 type: software
-version: 0.1.3
-date-released: 2026-11-26
+version: "0.1.3"
+date-released: "2026-11-26"
 authors:
   - family-names: Chaihong
     given-names: Chatchawich
@@ -12,7 +12,9 @@ authors:
     affiliation: "Prince of Songkla University"
 repository-code: "https://github.com/chatchawich-c/AetioCore"
 url: "https://chatchawich-c.github.io/AetioCore/"
-license: "MIT OR Apache-2.0"
+license:
+  - mit
+  - apache-2.0
 funding:
   - name: "European Union Erasmus+ Capacity Building in Higher Education (CBHE) ECO-WIND"
     grant-number: "ERASMUS-EDU-2025-CBHE-101177220"
