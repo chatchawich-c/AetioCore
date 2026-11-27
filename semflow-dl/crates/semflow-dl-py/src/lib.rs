@@ -57,8 +57,13 @@ impl PyWhiteBoxModel {
         let slice = cal_data
             .as_slice()
             .map_err(|_| PyValueError::new_err("Expected C-contiguous float32"))?;
-        let view = MatrixView::new(slice, cal_data.shape()[0], cal_data.shape()[1], MatrixLayout::RowMajor)
-            .map_err(PyValueError::new_err)?;
+        let view = MatrixView::new(
+            slice,
+            cal_data.shape()[0],
+            cal_data.shape()[1],
+            MatrixLayout::RowMajor,
+        )
+        .map_err(PyValueError::new_err)?;
         self.inner
             .calibrate_conformal(view, &col_names, alpha)
             .map_err(PyValueError::new_err)
@@ -73,8 +78,13 @@ impl PyWhiteBoxModel {
         let slice = data
             .as_slice()
             .map_err(|_| PyValueError::new_err("Expected C-contiguous float32"))?;
-        let view = MatrixView::new(slice, data.shape()[0], data.shape()[1], MatrixLayout::RowMajor)
-            .map_err(PyValueError::new_err)?;
+        let view = MatrixView::new(
+            slice,
+            data.shape()[0],
+            data.shape()[1],
+            MatrixLayout::RowMajor,
+        )
+        .map_err(PyValueError::new_err)?;
         let (actual_map, pred_map) = self
             .inner
             .predict_latents(view, &col_names)
@@ -106,13 +116,23 @@ impl PyWhiteBoxModel {
         let slice = data
             .as_slice()
             .map_err(|_| PyValueError::new_err("Expected C-contiguous float32"))?;
-        let view = MatrixView::new(slice, data.shape()[0], data.shape()[1], MatrixLayout::RowMajor)
-            .map_err(PyValueError::new_err)?;
+        let view = MatrixView::new(
+            slice,
+            data.shape()[0],
+            data.shape()[1],
+            MatrixLayout::RowMajor,
+        )
+        .map_err(PyValueError::new_err)?;
         let s = self
             .inner
             .intervene_shift(view, &col_names, intervened_var, delta, target_var)
             .map_err(PyValueError::new_err)?;
-        Ok((s.total_effect, s.direct_effect, s.indirect_effect, s.conformal_half_width))
+        Ok((
+            s.total_effect,
+            s.direct_effect,
+            s.indirect_effect,
+            s.conformal_half_width,
+        ))
     }
 }
 
@@ -129,16 +149,49 @@ fn fit_whitebox_f32(
     let slice = data
         .as_slice()
         .map_err(|_| PyValueError::new_err("Expected C-contiguous float32"))?;
-    let view = MatrixView::new(slice, data.shape()[0], data.shape()[1], MatrixLayout::RowMajor)
-        .map_err(PyValueError::new_err)?;
+    let view = MatrixView::new(
+        slice,
+        data.shape()[0],
+        data.shape()[1],
+        MatrixLayout::RowMajor,
+    )
+    .map_err(PyValueError::new_err)?;
     let inner = fit_whitebox_sem(formula, view, &col_names, knots, smooth_lambda, max_iter)
         .map_err(PyValueError::new_err)?;
     Ok(PyWhiteBoxModel { inner })
+}
+
+#[pyfunction]
+#[pyo3(signature = (n_vars=4, n_edges=3, sigma_min_eig=0.25, is_acyclic=true))]
+fn emit_smt2(n_vars: usize, n_edges: usize, sigma_min_eig: f64, is_acyclic: bool) -> String {
+    use sem_traits::cert::{CertificateEmitter, SemCertificate};
+    SemCertificate {
+        n_vars,
+        n_edges,
+        sigma_min_eig,
+        is_acyclic,
+    }
+    .emit_smt2()
+}
+
+#[pyfunction]
+#[pyo3(signature = (n_vars=4, n_edges=3, sigma_min_eig=0.25, is_acyclic=true))]
+fn emit_lean4(n_vars: usize, n_edges: usize, sigma_min_eig: f64, is_acyclic: bool) -> String {
+    use sem_traits::cert::{CertificateEmitter, SemCertificate};
+    SemCertificate {
+        n_vars,
+        n_edges,
+        sigma_min_eig,
+        is_acyclic,
+    }
+    .emit_lean4()
 }
 
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PyWhiteBoxModel>()?;
     m.add_function(wrap_pyfunction!(fit_whitebox_f32, m)?)?;
+    m.add_function(wrap_pyfunction!(emit_smt2, m)?)?;
+    m.add_function(wrap_pyfunction!(emit_lean4, m)?)?;
     Ok(())
 }

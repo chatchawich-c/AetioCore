@@ -10,16 +10,28 @@ members = [
     "semflow-dl/crates/semflow-dl-core",
     "semflow-dl/crates/semflow-dl-py",
 ]
+exclude = ["bindings/r"]
+default-members = [
+    "semflow/crates/sem-traits",
+    "semflow/crates/sem-dsl",
+    "semflow/crates/sem-autodiff",
+    "semflow/crates/sem-pls",
+    "semflow/crates/sem-cb",
+    "semflow-dl/crates/semflow-dl-core",
+]
 
 [workspace.package]
-version = "0.1.5"
+version = "0.1.6"
 edition = "2021"
 license = "MIT OR Apache-2.0"
+authors = ["Chatchawich Chaihong <6610130021@email.psu.ac.th>"]
+repository = "https://github.com/chatchawich-c/AetioCore"
 
 [workspace.dependencies]
 faer = "0.20"
 rayon = "1.10"
-pyo3 = { version = "0.22", features = ["extension-module"] }
+libm = "0.2"
+pyo3 = { version = "0.22", features = ["extension-module", "abi3-py39"] }
 numpy = "0.22"
 sem-traits = { path = "semflow/crates/sem-traits" }
 sem-dsl = { path = "semflow/crates/sem-dsl" }

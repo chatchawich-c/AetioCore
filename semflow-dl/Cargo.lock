@@ -906,22 +906,22 @@ dependencies = [
 
 [[package]]
 name = "sem-autodiff"
-version = "0.1.4"
+version = "0.1.6"
 dependencies = [
  "faer",
 ]
 
 [[package]]
 name = "sem-dsl"
-version = "0.1.4"
+version = "0.1.6"
 
 [[package]]
 name = "sem-traits"
-version = "0.1.4"
+version = "0.1.6"
 
 [[package]]
 name = "semflow-dl-core"
-version = "0.1.4"
+version = "0.1.6"
 dependencies = [
  "rayon",
  "sem-autodiff",
@@ -931,7 +931,7 @@ dependencies = [
 
 [[package]]
 name = "semflow-dl-py"
-version = "0.1.4"
+version = "0.1.6"
 dependencies = [
  "numpy",
  "pyo3",

@@ -108,3 +108,5 @@ pub trait Calibrator: Send + Sync {
     fn calibrate(&mut self, residuals: &[f64], alpha: f64);
     fn half_width(&self) -> f64;
 }
+
+pub mod cert;

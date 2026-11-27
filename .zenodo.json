@@ -17,5 +17,6 @@
     "rust",
     "pyo3",
     "eco-wind"
-  ]
+  ],
+  "version": "0.1.6"
 }

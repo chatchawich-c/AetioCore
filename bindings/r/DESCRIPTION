@@ -1,6 +1,6 @@
 Package: aetiocore
 Title: Rust-Backed Structural Equation Modeling and Causal Risk Flow
-Version: 0.1.2
+Version: 0.1.6
 Authors@R: person("Chatchawich", "Chaihong", email = "6610130021@email.psu.ac.th", role = c("aut", "cre"), comment = c(ORCID = "0009-0000-7379-5738"))
 Description: Pure-Rust engine for Covariance-Based SEM (ML/GLS/ULS, FIML), Consistent PLS-SEM, and systemic causal risk propagation. Supported by the European Union Erasmus+ CBHE ECO-WIND project (Grant No. ERASMUS-EDU-2025-CBHE-101177220).
 License: MIT | file LICENSE

@@ -101,8 +101,13 @@ fn fit_pls_f32(
     let slice = data
         .as_slice()
         .map_err(|_| PyValueError::new_err("Array must be C-contiguous float32"))?;
-    let view = MatrixView::new(slice, data.shape()[0], data.shape()[1], MatrixLayout::RowMajor)
-        .map_err(PyValueError::new_err)?;
+    let view = MatrixView::new(
+        slice,
+        data.shape()[0],
+        data.shape()[1],
+        MatrixLayout::RowMajor,
+    )
+    .map_err(PyValueError::new_err)?;
     let res = sem_pls::fit_pls(&ir, view, &col_names, consistent, n_boot, max_iter, tol)
         .map_err(PyValueError::new_err)?;
     Ok(wrap_pls(res))
@@ -123,8 +128,13 @@ fn fit_pls_f64(
     let slice = data
         .as_slice()
         .map_err(|_| PyValueError::new_err("Array must be C-contiguous float64"))?;
-    let view = MatrixView::new(slice, data.shape()[0], data.shape()[1], MatrixLayout::RowMajor)
-        .map_err(PyValueError::new_err)?;
+    let view = MatrixView::new(
+        slice,
+        data.shape()[0],
+        data.shape()[1],
+        MatrixLayout::RowMajor,
+    )
+    .map_err(PyValueError::new_err)?;
     let res = sem_pls::fit_pls(&ir, view, &col_names, consistent, n_boot, max_iter, tol)
         .map_err(PyValueError::new_err)?;
     Ok(wrap_pls(res))
@@ -142,8 +152,13 @@ fn fit_cb_f32(
     let slice = data
         .as_slice()
         .map_err(|_| PyValueError::new_err("Array must be C-contiguous float32"))?;
-    let view = MatrixView::new(slice, data.shape()[0], data.shape()[1], MatrixLayout::RowMajor)
-        .map_err(PyValueError::new_err)?;
+    let view = MatrixView::new(
+        slice,
+        data.shape()[0],
+        data.shape()[1],
+        MatrixLayout::RowMajor,
+    )
+    .map_err(PyValueError::new_err)?;
     let res = sem_cb::fit_cb_ml(&ir, view, &col_names, max_iter).map_err(PyValueError::new_err)?;
     Ok(wrap_cb(res))
 }
@@ -160,8 +175,13 @@ fn fit_cb_f64(
     let slice = data
         .as_slice()
         .map_err(|_| PyValueError::new_err("Array must be C-contiguous float64"))?;
-    let view = MatrixView::new(slice, data.shape()[0], data.shape()[1], MatrixLayout::RowMajor)
-        .map_err(PyValueError::new_err)?;
+    let view = MatrixView::new(
+        slice,
+        data.shape()[0],
+        data.shape()[1],
+        MatrixLayout::RowMajor,
+    )
+    .map_err(PyValueError::new_err)?;
     let res = sem_cb::fit_cb_ml(&ir, view, &col_names, max_iter).map_err(PyValueError::new_err)?;
     Ok(wrap_cb(res))
 }
@@ -170,6 +190,32 @@ fn fit_cb_f64(
 fn validate_dsl(formula: &str) -> PyResult<bool> {
     sem_dsl::parse_formula(formula).map_err(PyValueError::new_err)?;
     Ok(true)
+}
+
+#[pyfunction]
+#[pyo3(signature = (n_vars=4, n_edges=3, sigma_min_eig=0.25, is_acyclic=true))]
+fn emit_smt2(n_vars: usize, n_edges: usize, sigma_min_eig: f64, is_acyclic: bool) -> String {
+    use sem_traits::cert::{CertificateEmitter, SemCertificate};
+    SemCertificate {
+        n_vars,
+        n_edges,
+        sigma_min_eig,
+        is_acyclic,
+    }
+    .emit_smt2()
+}
+
+#[pyfunction]
+#[pyo3(signature = (n_vars=4, n_edges=3, sigma_min_eig=0.25, is_acyclic=true))]
+fn emit_lean4(n_vars: usize, n_edges: usize, sigma_min_eig: f64, is_acyclic: bool) -> String {
+    use sem_traits::cert::{CertificateEmitter, SemCertificate};
+    SemCertificate {
+        n_vars,
+        n_edges,
+        sigma_min_eig,
+        is_acyclic,
+    }
+    .emit_lean4()
 }
 
 #[pymodule]
@@ -181,5 +227,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(fit_pls_f64, m)?)?;
     m.add_function(wrap_pyfunction!(fit_cb_f32, m)?)?;
     m.add_function(wrap_pyfunction!(fit_cb_f64, m)?)?;
+    m.add_function(wrap_pyfunction!(emit_smt2, m)?)?;
+    m.add_function(wrap_pyfunction!(emit_lean4, m)?)?;
     Ok(())
 }
