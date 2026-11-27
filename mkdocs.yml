@@ -1,45 +1,48 @@
 site_name: AetioCore Documentation
-site_description: Unified Rust-Backed Structural Equation Modeling and White-Box Causal Deep Learning
+site_description: Unified Rust-Backed Structural Equation Modeling and White-Box Causal
+  Deep Learning
 site_url: https://chatchawich-c.github.io/AetioCore/
 repo_url: https://github.com/chatchawich-c/AetioCore
 repo_name: chatchawich-c/AetioCore
-
 theme:
   name: material
   palette:
-    - scheme: default
-      primary: indigo
-      accent: teal
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
-      accent: teal
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
+  - scheme: default
+    primary: indigo
+    accent: deep purple
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+  - scheme: slate
+    primary: indigo
+    accent: deep purple
+    toggle:
+      icon: material/brightness-4
+      name: Switch to light mode
   features:
-    - navigation.tabs
-    - navigation.top
-    - content.code.copy
-
+  - navigation.tabs
+  - navigation.sections
+  - navigation.top
+  - search.suggest
+  - search.highlight
+  - content.code.copy
 markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
-  - admonition
-  - pymdownx.highlight
-  - pymdownx.superfences
-  - pymdownx.inlinehilite
-  - tables
-
+- pymdownx.arithmatex:
+    generic: true
+- admonition
+- pymdownx.highlight
+- pymdownx.superfences
+- pymdownx.inlinehilite
+- tables
 extra_javascript:
-  - javascripts/mathjax.js
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
-
+- javascripts/mathjax.js
+- https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 nav:
-  - Home: index.md
-  - Usage & Installation: usage.md
-  - API Reference: api.md
-  - Mathematical Equations: equations.md
-  - Benchmarks & Gallery: benchmarks/index.md
+- Home: index.md
+- Usage & Installation: usage.md
+- API Reference: api.md
+- Mathematical Equations: equations.md
+- Benchmarks & Gallery: benchmarks/index.md
+- Benchmarks: benchmarks.md
+copyright: 'Copyright &copy; 2026 Chatchawich Chaihong (ORCID: 0009-0000-7379-5738)
+  &mdash; EU Erasmus+ CBHE ECO-WIND (Grant No. ERASMUS-EDU-2025-CBHE-101177220)'
