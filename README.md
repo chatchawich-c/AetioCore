@@ -1,27 +1,25 @@
-# AetioCore-SEM & AetioCore-DL (`v0.1.4`)
+# AetioCore `v0.1.6`
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24568459.svg)](https://doi.org/10.5281/zenodo.24568459)
-
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://chatchawich-c.github.io/AetioCore/)
-[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-green)](LICENSE-APACHE)
+[![PyPI version](https://img.shields.io/pypi/v/aetiocore-sem.svg)](https://pypi.org/project/aetiocore-sem/)
+[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-green.svg)](https://github.com/chatchawich-c/AetioCore)
 
-Unified Pure-Rust ecosystem for **Scalable Structural Equation Modeling (`AetioCore-SEM`)** and **Edge-Level White-Box Causal Deep Learning (`AetioCore-DL`)** with zero-copy Python and R bindings.
+## Overview
+
+High-performance Pure-Rust core library with native Python (PyO3) and R bindings for PLSc-SEM causal discovery and interventional inference.
 
 ## Installation
 
 ```bash
-pip install aetiocore-sem aetiocore-sem-dl
-```
-
-```r
-install.packages("aetiocore", repos = c("https://chatchawich-c.r-universe.dev", "https://cloud.r-project.org"))
+pip install aetiocore-sem
 ```
 
 ## Documentation & Benchmarks
 
-- **Documentation:** https://chatchawich-c.github.io/AetioCore/
-- **External Benchmarks:** Run from `../ecowind-benchmarks` (Zero-Duplication Policy).
+- **Central Benchmark Portal:** [https://chatchawich-c.github.io/CoreHub/benchmarks/](https://chatchawich-c.github.io/CoreHub/benchmarks/)
+- **Dataset Catalog (with DOIs):** [https://chatchawich-c.github.io/CoreHub/datasets/](https://chatchawich-c.github.io/CoreHub/datasets/)
 
 ## Funding Attribution
 
-Supported by the **European Union Erasmus+ Capacity Building in Higher Education (CBHE)** project **ECO-WIND** (*Enhancing Capacity in Condition-based Maintenance of Wind Energy*, **Grant No. `ERASMUS-EDU-2025-CBHE-101177220`**).
+EU Erasmus+ CBHE **ECO-WIND** (Grant No. `ERASMUS-EDU-2025-CBHE-101177220`).
