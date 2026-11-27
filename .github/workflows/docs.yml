@@ -1,25 +1,31 @@
-name: Deploy Docs
+name: Docs
+
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-      - run: pip install mkdocs-material pymdown-extensions
-      - run: python3 scripts/sync_benchmarks.py
+          python-version: "3.11"
+      - run: pip install --upgrade pip && pip install mkdocs-material pymdown-extensions
       - uses: actions/configure-pages@v5
       - run: python -m mkdocs build --strict
       - uses: actions/upload-pages-artifact@v3
