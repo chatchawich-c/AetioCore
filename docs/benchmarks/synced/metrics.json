@@ -1,23 +1,43 @@
 {
   "library": "AetioCore",
   "version": "0.1.6",
-  "peak_rss_mib": 147.48,
+  "peak_rss_mib": 196.09,
   "results": [
     {
+      "tier": "Tier I: Synthetic",
       "suite": "do(LX)-Intervention",
-      "engine": "AetioCore (PLSc-SEM Proxy)",
-      "fit_ms": 130.888,
-      "infer_p50_ms": 0.219,
-      "infer_p99_ms": 0.57,
-      "metric": "Intervention_RMSE=0.1459, ATE_Error=0.0035, conv=1e-6"
+      "engine": "aetiocore-sem",
+      "fit_ms": 7.841,
+      "infer_p50_ms": 0.007,
+      "infer_p99_ms": 0.008,
+      "metric": "Intervention_RMSE=0.1470, ATE_Error=0.0000, conv=1e-6"
     },
     {
+      "tier": "Tier I: Synthetic",
+      "suite": "do(LX)-Intervention",
+      "engine": "aetiocore-sem-dl",
+      "fit_ms": 21.583,
+      "infer_p50_ms": 0.006,
+      "infer_p99_ms": 0.007,
+      "metric": "Intervention_RMSE=0.1470, ATE_Error=0.0000"
+    },
+    {
+      "tier": "Tier I: Synthetic",
       "suite": "do(LX)-Intervention",
       "engine": "XGBoost",
-      "fit_ms": 182.4,
-      "infer_p50_ms": 0.429,
-      "infer_p99_ms": 0.768,
+      "fit_ms": 70.61,
+      "infer_p50_ms": 0.402,
+      "infer_p99_ms": 0.542,
       "metric": "Intervention_RMSE=1.0990, ATE_Error=0.5208"
+    },
+    {
+      "tier": "Tier I: Synthetic",
+      "suite": "do(LX)-Intervention",
+      "engine": "NGBoost",
+      "fit_ms": 590.652,
+      "infer_p50_ms": 18.46,
+      "infer_p99_ms": 25.76,
+      "metric": "Intervention_RMSE=4.4899, ATE_Error=3.4525"
     }
   ]
 }
